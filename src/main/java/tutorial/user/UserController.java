@@ -11,6 +11,7 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @CrossOrigin()
     @PostMapping("/users/register")
     public Status registerUser(@Valid @RequestBody User newUser) {
         List<User> users = userRepository.findAll();
@@ -26,6 +27,7 @@ public class UserController {
         return Status.SUCCESS;
     }
 
+    @CrossOrigin()
     @PostMapping("/users/login")
     public Status loginUser(@Valid @RequestBody User user) {
         List<User> users = userRepository.findAll();
@@ -41,6 +43,7 @@ public class UserController {
         return Status.FAILURE;
     }
 
+    @CrossOrigin()
     @PostMapping("/users/logout")
     public Status logUserOut(@Valid @RequestBody User user) {
         List<User> users = userRepository.findAll();
@@ -56,6 +59,7 @@ public class UserController {
         return Status.FAILURE;
     }
 
+    @CrossOrigin()
     @DeleteMapping("/users/all")
     public Status deleteUsers() {
         userRepository.deleteAll();
