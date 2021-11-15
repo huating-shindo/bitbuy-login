@@ -1,4 +1,4 @@
-package tutorial.user;
+package bitbuy.user;
 
 public enum Status {
     SUCCESS,
