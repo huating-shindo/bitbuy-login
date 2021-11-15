@@ -1,10 +1,19 @@
 Simple Login/Register system written using Spring Boot/Spring Security.
 
+## Running the application locally
 
-#DB
+There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `bitbuy.BibuyApplication` class from your IDE.
+
+Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
+
+```shell
+mvn spring-boot:run
+```
+
+# DB
 Use h2 memory db. By default, two users 'user'(password: user)/'admin'(password: admin) are created on startup. Refer to the [DB script](src/main/resources/data.sql)
 
-#Endpoint
+# Endpoint
 
 ## register
 POST /api/register
