@@ -1,8 +1,8 @@
 package bitbuy.user.error;
 
-public class UserNotFoundException extends RuntimeException {
+public class LoginFailedException extends RuntimeException {
 
-    public UserNotFoundException(String username) {
-        super("User " + username + " not found");
+    public LoginFailedException(String fail) {
+        super(fail);
     }
 }

@@ -1,4 +1,4 @@
-package bitbuy.user;
+package bitbuy.user.security;
 
 import bitbuy.user.model.CustomUser;
 import bitbuy.user.model.Role;
@@ -26,7 +26,6 @@ public class CustomDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         Optional<User> user = null;
-        System.out.println(username);
         try {
             user = oauthDao.findByUsername(username);
             return user.map(u ->
@@ -35,11 +34,11 @@ public class CustomDetailsService implements UserDetailsService {
                         for(Role role:u.getRoles()) {
                             roleList.add(role.getRoleName());
                         }
-                        return CustomUser.builder()
+                        UserDetails ud =  CustomUser.builder()
                             .username(u.getUsername())
-                            //change here to store encoded password in db
-                            .password(passwordEncoder.encode(u.getPassword()))
+                            .password(u.getPassword())
                             .roles(roleList.toArray(new String[0])).build();
+                        return ud;
                     }
             ).orElseThrow(() -> new Exception());
         } catch (Exception e) {

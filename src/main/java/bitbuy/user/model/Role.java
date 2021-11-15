@@ -1,4 +1,4 @@
-package bitbuy.user;
+package bitbuy.user.model;
 
 import javax.persistence.*;
 

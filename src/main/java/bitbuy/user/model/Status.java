@@ -1,4 +1,4 @@
-package bitbuy.user;
+package bitbuy.user.model;
 
 public enum Status {
     SUCCESS,

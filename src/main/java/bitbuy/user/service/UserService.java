@@ -1,5 +1,6 @@
-package bitbuy.user;
+package bitbuy.user.service;
 
+import bitbuy.user.error.LoginFailedException;
 import bitbuy.user.model.User;
 import bitbuy.user.repository.RoleRepository;
 import bitbuy.user.repository.UserRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,15 +42,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Optional<User> loginUser(String username, String password) throws Exception{
+    public Optional<User> loginUser(String username, String password) throws LoginFailedException {
         Optional<User> op = userRepository.findByUsername(username);
         return op.map(u -> {
             User matchUser = null;
             if(passwordEncoder.matches(password, u.getPassword())) {
                 matchUser = u;
+            } else {
+                throw new LoginFailedException("Password incorrect");
             }
             return Optional.of(matchUser);
-        }).orElseThrow(() -> new Exception("No user found"));
+        }).orElseThrow(() -> new LoginFailedException("No user found"));
     }
 
     public Optional<User> getUserInfo(long uuid) {
@@ -67,5 +71,9 @@ public class UserService {
             userRepository.save(user);
         }
         return op;
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

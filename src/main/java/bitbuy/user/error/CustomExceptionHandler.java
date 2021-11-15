@@ -1,4 +1,4 @@
-package bitbuy.user;
+package bitbuy.user.error;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     // Let Spring BasicErrorController handle the exception, we just override the status code
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(LoginFailedException.class)
     public void springHandleNotFound(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.NOT_FOUND.value());
     }

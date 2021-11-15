@@ -1,4 +1,4 @@
-package bitbuy.user;
+package bitbuy.user.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -12,14 +12,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
 public class User {
     private @Id @GeneratedValue long id;
     private @NotBlank String username;
     private @NotBlank String password;
     private @Email String email;
     private @Pattern(regexp = "\\d{10}") String phone;
-    private boolean loggedIn;
+//    private boolean loggedIn;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
@@ -38,7 +37,6 @@ public class User {
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.loggedIn = false;
     }
 
     public long getId() {
@@ -85,14 +83,6 @@ public class User {
         this.grantedAuthoritiesList = grantedAuthoritiesList;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
     public List<Role> getRoles() {
         return roles;
     }
@@ -112,7 +102,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, loggedIn);
+        return Objects.hash(id, username, password);
     }
 
     @Override
@@ -121,7 +111,6 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", loggedIn=" + loggedIn +
                 '}';
     }
 }
